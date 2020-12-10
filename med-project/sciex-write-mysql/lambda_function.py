@@ -5,6 +5,8 @@ import tempfile
 import boto3
 import pymysql
 
+import database_helper as db_helper
+
 
 DB_HOST = os.environ['DB_HOST']
 DB_USERNAME = os.environ['DB_USERNAME']
@@ -30,34 +32,40 @@ def lambda_handler(event, context):
     
     print("SUCCESS: Connection to RDS MySQL instance succeeded")
 
-    # Loop Through S3-events
-    for record in event['Records']:
-        source_bucket = record['s3']['bucket']['name']
-        key = record['s3']['object']['key']
-        print('SUCCESS : Object was uploaded: {}'.format(key))
+    # Creating table in case, No table
+    if not db_helper.table_exists(conn, DB_NAME, 'sciex'):
+        print('INFO: No table, creating.')
+        db_helper.create_sciex_table(conn)
+        print('SUCCESS: Table created.')
 
-        # Temporary location for storing s3 object
-        with tempfile.TemporaryDirectory() as tmpdir:
-            file_name = key.split('/')[-1]
-            file_type = file_name.split('.')[-1]
+    # Getting event info
+    source_bucket = event['Records'][0]['s3']['bucket']['name']
+    key = event['Records'][0]['s3']['object']['key']
+    print('SUCCESS : Object was uploaded: {}'.format(key))
 
-            download_path = os.path.join(tmpdir, file_name)
-            print('SUCCESS: TEMPDIR has been created')
+    # Temporary location for storing s3 object
+    with tempfile.TemporaryDirectory() as tmpdir:
+        file_name = key.split('/')[-1]
+        file_type = file_name.split('.')[-1]
 
-            s3.download_file(source_bucket, key, download_path)
-            print('SUCCESS: S3 Object has been downloaded')
+        download_path = os.path.join(tmpdir, file_name)
+        print('SUCCESS: TEMPDIR has been created')
 
-            # Getting data by set 100 rows or less
-            query_data_generator = get_optimized_query_data(download_path, file_type)
-            sql = 'INSERT INTO sciex (sample_name, component_name, actual_concentration, calculated_concentration) VALUES (%s, %s, %s, %s)'
+        s3.download_file(source_bucket, key, download_path)
+        print('SUCCESS: S3 Object has been downloaded')
 
-            # MySQL cursor
-            with conn.cursor() as cursor:
+        # Getting data by set 80000 rows or less
+        query_data_generator = get_optimized_query_data(download_path, file_type)
+        sql = """INSERT INTO sciex (sample_name, component_name, actual_concentration, calculated_concentration) 
+                 VALUES (%s, %s, %s, %s)"""
 
-                for data in query_data_generator:
-                    cursor.executemany(sql, data)
-                    conn.commit()
-                    print('SUCCESS: Committing...')
+        # MySQL cursor
+        with conn.cursor() as cursor:
+
+            for data in query_data_generator:
+                cursor.executemany(sql, data)
+                conn.commit()
+                print('SUCCESS: Committing...')
 
     print('SUCCESS: DONE')
 
@@ -112,4 +120,3 @@ def get_optimized_query_data(s3_file, s3_file_type):
 
     s3_file_object.close()
     yield data_set
-    

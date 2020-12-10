@@ -1,6 +1,2 @@
-# lambda
-AWS Lambda functions source
-
-# How to Bundle zip lambda
-within lambda folder, pip install -t . 'package-name'
-zip -r9 'lambda-name' 'package/s'
+# How to
+_All sub-repos have their own corresponding README files_
