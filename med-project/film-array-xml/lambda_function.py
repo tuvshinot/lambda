@@ -34,7 +34,8 @@ def lambda_handler(event, context):
 
     # Creating table in case, no tables
     tables_exist = [db_helper.table_exists(conn, DB_NAME, table_name)
-                    for table_name in ('filmArrayTest', 'resultGroup', 'result')]
+                    for table_name in ('result_machine_film_array', 
+                    'result_machine_film_array_group', 'result_machine_film_array_group_item')]
 
     if not all(tables_exist):
         print('INFO: No tables, creating.')
@@ -70,7 +71,7 @@ def lambda_handler(event, context):
         print('SUCCESS: XML has been parsed.')
 
         # Writing to filmArrayTest
-        film_array_test_id = write_to_film_array_test(root, conn)
+        film_array_test_id = write_to_result_machine_film_array(root, conn)
         print('SUCCESS: filmArrayTest is written.')
 
         # Writing Result and Result Group
@@ -78,7 +79,7 @@ def lambda_handler(event, context):
         result_groups = test.findall('resultGroup')
 
         for result_group in result_groups:
-            write_to_result_group(result_group, conn, film_array_test_id)
+            write_to_result_machine_film_array_group(result_group, conn, film_array_test_id)
 
         print('SUCCESS: ResultGroup and Result has been written.')
 
@@ -87,8 +88,8 @@ def lambda_handler(event, context):
     conn.close()
 
 
-def write_to_film_array_test(root, conn):
-    """ Writes to filmArrayTest
+def write_to_result_machine_film_array(root, conn):
+    """ Writes to result_machine_film_array
         Args: root(XML element), conn(DB connection)
         Returns: id inserted to film_array_test
     """
@@ -124,7 +125,7 @@ def write_to_film_array_test(root, conn):
                header_info_sender_name, header_info_processing_identifier, header_info_version,
                header_info_date_time, header_info_message_type, request_status)
 
-    sql = """INSERT INTO filmArrayTest 
+    sql = """INSERT INTO result_machine_film_array 
               (specimen_identifier, test_identifier, test_name, test_version, test_instrument_type, 
               test_instrument_serial_number, disposable_identifier, disposable_reference, disposable_type, 
               disposable_lot_number, header_info_sender_name, header_info_processing_identifier, 
@@ -137,8 +138,8 @@ def write_to_film_array_test(root, conn):
         return cursor.lastrowid
 
 
-def write_to_result_group(result_group, conn, film_array_test_id):
-    """ Writes to result_group table
+def write_to_result_machine_film_array_group(result_group, conn, film_array_test_id):
+    """ Writes to result_machine_film_array_group table
         Args: result_group(XML element), conn(DB connection), film_array_test_id
         Returns: id inserted to result_group table
     """
@@ -146,7 +147,7 @@ def write_to_result_group(result_group, conn, film_array_test_id):
     result_group_name = result_group.find('resultGroupName').text
     result_group_coding_system = result_group.find('resultGroupCodingSystem').text
 
-    sql = """INSERT INTO resultGroup (result_group_code, result_group_name, result_group_coding_system, test_id)
+    sql = """INSERT INTO result_machine_film_array_group (result_group_code, result_group_name, result_group_coding_system, test_id)
              VALUES (%s, %s, %s, %s)"""
 
     with conn.cursor() as cursor:
@@ -156,11 +157,11 @@ def write_to_result_group(result_group, conn, film_array_test_id):
 
     # Writing Result
     results = result_group.findall('result')
-    write_to_result(results, conn, result_group_id)
+    write_to_result_machine_film_array_group_item(results, conn, result_group_id)
 
 
-def write_to_result(results, conn, result_group_id):
-    """ Writes to result table
+def write_to_result_machine_film_array_group_item(results, conn, result_group_id):
+    """ Writes to write_to_result_machine_film_array_group_item table
         Args: result(XML element), conn(DB connection), result_group_id
         Returns: id inserted to result table
     """
@@ -180,7 +181,7 @@ def write_to_result(results, conn, result_group_id):
         datasets.append((result_test_code, result_test_name, result_coding_system, value_type, observation_value,
                          observation_name, operator_name, result_date_time, result_group_id))
 
-    sql = """INSERT INTO result (result_test_code, result_test_name, result_coding_system, value_type, 
+    sql = """INSERT INTO result_machine_film_array_group_item (result_test_code, result_test_name, result_coding_system, value_type, 
              observation_value, observation_name, operator_name, result_date_time, result_group_id)
                  VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s)"""
 

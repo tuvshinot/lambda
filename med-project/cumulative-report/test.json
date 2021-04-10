@@ -1,0 +1,186 @@
+
+# service_request by patient_id
+{'accession_number': 210210001, 'patient_id': 24, 'created_by': 1, 'created_at': datetime.datetime(2021, 3, 26, 21, 46, 53)}
+{'accession_number': 210210003, 'patient_id': 26, 'created_by': 1, 'created_at': datetime.datetime(2021, 3, 26, 21, 46, 53)}
+{'accession_number': 210210007, 'patient_id': 25, 'created_by': 1, 'created_at': datetime.datetime(2021, 3, 26, 21, 46, 53)}
+{'accession_number': 210210009, 'patient_id': 22, 'created_by': 1, 'created_at': datetime.datetime(2021, 3, 26, 21, 46, 53)}
+{'accession_number': 210210056, 'patient_id': 23, 'created_by': 1, 'created_at': datetime.datetime(2021, 3, 26, 21, 46, 53)}
+
+# specimen
+{'specimen_id': 1, 'accession_number': 210210003, 'type': 'nasal swab', 'created_by': 1, 'created_at': datetime.datetime(2021, 3, 26, 22, 3, 26)}
+{'specimen_id': 2, 'accession_number': 210210007, 'type': 'nasal swab', 'created_by': 1, 'created_at': datetime.datetime(2021, 3, 26, 22, 3, 26)}
+{'specimen_id': 3, 'accession_number': 210210001, 'type': 'urine', 'created_by': 2, 'created_at': datetime.datetime(2021, 3, 29, 22, 4, 34)}
+{'specimen_id': 4, 'accession_number': 210210003, 'type': 'urine', 'created_by': 2, 'created_at': datetime.datetime(2021, 3, 29, 22, 4, 34)}
+{'specimen_id': 5, 'accession_number': 210210007, 'type': 'urine', 'created_by': 2, 'created_at': datetime.datetime(2021, 3, 29, 22, 4, 34)}
+{'specimen_id': 6, 'accession_number': 210210009, 'type': 'urine', 'created_by': 1, 'created_at': datetime.datetime(2021, 3, 29, 22, 4, 34)}
+{'specimen_id': 7, 'accession_number': 210210056, 'type': 'urine', 'created_by': 1, 'created_at': datetime.datetime(2021, 3, 29, 22, 4, 34)}
+
+# specimen_result
+{'result_id': 1, 'accession_number': 210210003, 'specimen_id': 1, 'machine_id': 3}
+{'result_id': 2, 'accession_number': 210210007, 'specimen_id': 2, 'machine_id': 3}
+{'result_id': 3, 'accession_number': 210210001, 'specimen_id': 3, 'machine_id': 1}
+{'result_id': 4, 'accession_number': 210210003, 'specimen_id': 4, 'machine_id': 1}
+{'result_id': 5, 'accession_number': 210210007, 'specimen_id': 5, 'machine_id': 1}
+{'result_id': 6, 'accession_number': 210210009, 'specimen_id': 6, 'machine_id': 1}
+{'result_id': 7, 'accession_number': 210210056, 'specimen_id': 7, 'machine_id': 1}
+
+# medical_machine
+{'machine_id': 1, 'name': 'Olympus AU400', 'results_table': 'result_machine_olympus'}
+{'machine_id': 2, 'name': 'Sciex 4500', 'results_table': 'result_machine_sciex'}
+{'machine_id': 3, 'name': 'FilmArray', 'results_table': 'result_machine_film_array'}
+
+# olympus
+{'id': 15, 'accession_number': '210218024', 'specimen_type': 'U', 
+    'patient_name': 'Mambreyan Marusya', 'amphetamine': '681.9', 'barbiturates': '152.0', 'benzodiazepine': 
+    '124.1', 'cocaine': '4.8', 'methadone': '195.1', 'opiates': '188.0', 'oxycodone': '1.3', 
+    'phencyclidine_pcp': '19.3', 'thc_cooh': '5.4', 'ecstacy_mdma': '38.9'}
+
+# sciex
+{'id': 116662, 'sample_name': 'CAL 3', 'component_name': 'Norbuprenorphine 2', 'actual_concentration': '10', 'calculated_concentration': '9.881452049'}
+
+# filmArray
+{'test_id': 1, 'specimen_identifier': '200604016', 'test_identifier': 'RP2', 'test_name': 'Respiratory Panel 2 - IVD', 'test_version': '1.1', 
+    'test_instrument_type': 'FilmArray', 'test_instrument_serial_number': 'TM00423', 'disposable_identifier': '29034635', 
+    'disposable_reference': 'RP2 v1.1', 'disposable_type': 'Pouch', 'disposable_lot_number': '232620', 'header_info_sender_name': 'FilmArray', 
+    'header_info_processing_identifier': 'P', 'header_info_version': '1394-97', 'header_info_date_time': '20200604130223', 
+    'header_info_message_type': 'FA_RESULTS', 'request_status': 'F', 'result_group_id': 1, 'result_group_code': 'VIRUSE', 'result_group_name': 'Viruses', 
+    'result_group_coding_system': 'BMX', 'film_array_group.test_id': 1, 'result_id': 13, 'result_test_code': 'PCR_PARAINFV_3', 
+    'result_test_name': 'Parainfluenza Virus 3', 'result_coding_system': 'BMX', 'value_type': 'CE', 'observation_value': 'DETECT', 
+    'observation_name': 'Detected', 'operator_name': 'Betsy Mathew (BMAnchor)', 'result_date_time': '20200604121506', 'gi.result_group_id': 1}
+{'test_id': 1, 'specimen_identifier': '200604016', 'test_identifier': 'RP2', 'test_name': 'Respiratory Panel 2 - IVD', 'test_version': '1.1', 
+    'test_instrument_type': 'FilmArray', 'test_instrument_serial_number': 'TM00423', 'disposable_identifier': '29034635', 'disposable_reference': 'RP2 v1.1', 
+    'disposable_type': 'Pouch', 'disposable_lot_number': '232620', 'header_info_sender_name': 'FilmArray', 'header_info_processing_identifier': 'P', 
+    'header_info_version': '1394-97', 'header_info_date_time': '20200604130223', 'header_info_message_type': 'FA_RESULTS', 'request_status': 'F', 'result_group_id': 1, 
+    'result_group_code': 'VIRUSE', 'result_group_name': 'Viruses', 'result_group_coding_system': 'BMX', 'film_array_group.test_id': 1, 'result_id': 14, 
+    'result_test_code': 'PCR_PARAINFV_4', 'result_test_name': 'Parainfluenza Virus 4', 'result_coding_system': 'BMX', 'value_type': 'CE', 'observation_value': 'DETECT', 
+    'observation_name': 'Detected', 'operator_name': 'Betsy Mathew (BMAnchor)', 'result_date_time': '20200604121506', 'gi.result_group_id': 1}
+{'test_id': 1, 'specimen_identifier': '200604016', 'test_identifier': 'RP2', 'test_name': 'Respiratory Panel 2 - IVD', 'test_version': '1.1', 'test_instrument_type': 'FilmArray', 
+    'test_instrument_serial_number': 'TM00423', 'disposable_identifier': '29034635', 'disposable_reference': 'RP2 v1.1', 'disposable_type': 'Pouch', 'disposable_lot_number': '232620',
+     'header_info_sender_name': 'FilmArray', 'header_info_processing_identifier': 'P', 'header_info_version': '1394-97', 'header_info_date_time': '20200604130223', 
+     'header_info_message_type': 'FA_RESULTS', 'request_status': 'F', 'result_group_id': 1, 'result_group_code': 'VIRUSE', 'result_group_name': 'Viruses', 
+     'result_group_coding_system': 'BMX', 'film_array_group.test_id': 1, 'result_id': 15, 'result_test_code': 'PCR_SYNCYTV', 'result_test_name': 'Respiratory Syncytial Virus', 
+     'result_coding_system': 'BMX', 'value_type': 'CE', 'observation_value': 'DETECT', 'observation_name': 'Detected', 'operator_name': 'Betsy Mathew (BMAnchor)', 
+     'result_date_time': '20200604121506', 'gi.result_group_id': 1}
+
+
+# patient
+{'patient_id': 22, 'first_name': 'Aroyan', 'last_name': 'Varduhi', 'street_address': 'None', 'city': 'None', 
+    'state': 'CA', 'zip': 'None', 'phone': 'None', 'dob': datetime.date(2021, 3, 26), 'gender': 'Male', 'payment_method': '{}', 
+    'insurance_information': '{}', 'created_at': None, 'updated_at': None}
+
+
+# result_machine_film_array
+{'test_id': 1, 
+    'specimen_identifier': '200604016', 
+    'test_identifier': 'RP2', 
+    'test_name': 'Respiratory Panel 2 - IVD', 
+    'test_version': '1.1', 
+    'test_instrument_type': 'FilmArray', 
+    'test_instrument_serial_number': 'TM00423', 
+    'disposable_identifier': '29034635', 
+    'disposable_reference': 'RP2 v1.1', 
+    'disposable_type': 'Pouch', 
+    'disposable_lot_number': '232620', 
+    'header_info_sender_name': 'FilmArray', 
+    'header_info_processing_identifier': 'P', 
+    'header_info_version': '1394-97', 
+    'header_info_date_time': '20200604130223', 
+    'header_info_message_type': 'FA_RESULTS', 
+    'request_status': 'F'}
+
+# {'result_group_id': 1, 'result_group_code': 'VIRUSE', 'result_group_name': 'Viruses', 'result_group_coding_system': 'BMX', 'test_id': 1}
+{'result_id': 1, 'result_test_code': 'PCR_ADENOV', 'result_test_name': 'Adenovirus', 'result_coding_system': 'BMX', 'value_type': 'CE', 'observation_value': 'DETECT', 
+    'observation_name': 'Detected', 'operator_name': 'Betsy Mathew (BMAnchor)', 'result_date_time': '20200604121506', 'result_group_id': 1}
+{'result_id': 2, 'result_test_code': 'PCR_CORONAV_229E', 'result_test_name': 'Coronavirus 229E', 'result_coding_system': 'BMX', 'value_type': 'CE', 'observation_value': 'DETECT', 'observation_name': 'Detected', 'operator_name': 'Betsy Mathew (BMAnchor)', 'result_date_time': '20200604121506', 'result_group_id': 1}
+{'result_id': 3, 'result_test_code': 'PCR_CORONAV_HKU1', 'result_test_name': 'Coronavirus HKU1', 'result_coding_system': 'BMX', 'value_type': 'CE', 'observation_value': 'DETECT', 'observation_name': 'Detected', 'operator_name': 'Betsy Mathew (BMAnchor)', 'result_date_time': '20200604121506', 'result_group_id': 1}
+{'result_id': 4, 'result_test_code': 'PCR_CORONAV_NL63', 'result_test_name': 'Coronavirus NL63', 'result_coding_system': 'BMX', 'value_type': 'CE', 'observation_value': 'DETECT', 'observation_name': 'Detected', 'operator_name': 'Betsy Mathew (BMAnchor)', 'result_date_time': '20200604121506', 'result_group_id': 1}
+{'result_id': 5, 'result_test_code': 'PCR_CORONAV_OC43', 'result_test_name': 'Coronavirus OC43', 'result_coding_system': 'BMX', 'value_type': 'CE', 'observation_value': 'DETECT', 'observation_name': 'Detected', 'operator_name': 'Betsy Mathew (BMAnchor)', 'result_date_time': '20200604121506', 'result_group_id': 1}
+{'result_id': 6, 'result_test_code': 'PCR_H_METAPNEUMOV', 'result_test_name': 'Human Metapneumovirus', 'result_coding_system': 'BMX', 'value_type': 'CE', 'observation_value': 'DETECT', 'observation_name': 'Detected', 'operator_name': 'Betsy Mathew (BMAnchor)', 'result_date_time': '20200604121506', 'result_group_id': 1}
+{'result_id': 7, 'result_test_code': 'PCR_H_RHINO_ENTEROV', 'result_test_name': 'Human Rhinovirus/Enterovirus', 'result_coding_system': 'BMX', 'value_type': 'CE', 'observation_value': 'DETECT', 'observation_name': 'Detected', 'operator_name': 'Betsy Mathew (BMAnchor)', 'result_date_time': '20200604121506', 'result_group_id': 1}
+{'result_id': 8, 'result_test_code': 'PCR_INFV_A_H1_2009', 'result_test_name': 'Influenza A H1-2009', 'result_coding_system': 'BMX', 'value_type': 'CE', 'observation_value': 'DETECT', 'observation_name': 'Detected', 'operator_name': 'Betsy Mathew (BMAnchor)', 'result_date_time': '20200604121506', 'result_group_id': 1}
+{'result_id': 9, 'result_test_code': 'PCR_INFA_V_H3', 'result_test_name': 'Influenza A H3', 'result_coding_system': 'BMX', 'value_type': 'CE', 'observation_value': 'DETECT', 'observation_name': 'Detected', 'operator_name': 'Betsy Mathew (BMAnchor)', 'result_date_time': '20200604121506', 'result_group_id': 1}
+{'result_id': 10, 'result_test_code': 'PCR_INFV_B', 'result_test_name': 'Influenza B', 'result_coding_system': 'BMX', 'value_type': 'CE', 'observation_value': 'DETECT', 'observation_name': 'Detected', 'operator_name': 'Betsy Mathew (BMAnchor)', 'result_date_time': '20200604121506', 'result_group_id': 1}
+
+
+# {'result_group_id': 2, 'result_group_code': 'BACTER', 'result_group_name': 'Bacteria', 'result_group_coding_system': 'BMX', 'test_id': 1}
+{'result_id': 16, 'result_test_code': 'PCR_BORPARAP', 'result_test_name': 'Bordetella parapertussis (IS1001)', 'result_coding_system': 'BMX', 'value_type': 'CE', 'observation_value': 'DETECT', 'observation_name': 'Detected', 'operator_name': 'Betsy Mathew (BMAnchor)', 'result_date_time': '20200604121506', 'result_group_id': 2}
+{'result_id': 17, 'result_test_code': 'PCR_BORPET', 'result_test_name': 'Bordetella pertussis (ptxP)', 'result_coding_system': 'BMX', 'value_type': 'CE', 'observation_value': 'DETECT', 'observation_name': 'Detected', 'operator_name': 'Betsy Mathew (BMAnchor)', 'result_date_time': '20200604121506', 'result_group_id': 2}
+{'result_id': 18, 'result_test_code': 'PCR_CHLPNE', 'result_test_name': 'Chlamydia pneumoniae', 'result_coding_system': 'BMX', 'value_type': 'CE', 'observation_value': 'DETECT', 'observation_name': 'Detected', 'operator_name': 'Betsy Mathew (BMAnchor)', 'result_date_time': '20200604121506', 'result_group_id': 2}
+{'result_id': 19, 'result_test_code': 'PCR_MYCPNE', 'result_test_name': 'Mycoplasma pneumoniae', 'result_coding_system': 'BMX', 'value_type': 'CE', 'observation_value': 'DETECT', 'observation_name': 'Detected', 'operator_name': 'Betsy Mathew (BMAnchor)', 'result_date_time': '20200604121506', 'result_group_id': 2}
+
+
+
+{
+    'patient_id': 26, 
+    'first_name': 'Susann', 
+    'last_name': 'Babadzhanyan', 
+    'street_address': 'None', 
+    'city': 'None', 
+    'state': 'CA', 
+    'zip': 'None', 
+    'phone': 'None', 
+    'dob': datetime.date(2021, 3, 26), 
+    'gender': 'Male', 
+    'payment_method': '{}', 
+    'insurance_information': '{}', 
+    'created_at': None, 
+    'updated_at': None, 
+
+    'accession_number': 210210003, 
+    'r.patient_id': 26, 
+    'created_by': 1, 
+    'r.created_at': datetime.datetime(2021, 3, 26, 21, 46, 53), 
+
+    'specimen_id': 1, 
+    's.accession_number': 210210003, 
+    'type': 'nasal swab', 
+    's.created_by': 1, 
+    's.created_at': datetime.datetime(2021, 3, 26, 22, 3, 26), 
+
+    'result_id': 1, 
+    'sr.accession_number': 210210003, 
+    'sr.specimen_id': 1, 
+    'machine_id': 3, 
+
+    'm.machine_id': 3, 
+    'name': 'FilmArray', 
+    'results_table': 'result_machine_film_array'
+}
+
+
+{
+    'patient_id': 26, 
+    'first_name': 'Susann', 
+    'last_name': 'Babadzhanyan', 
+    'street_address': 'None', 
+    'city': 'None', 
+    'state': 'CA', 
+    'zip': 'None', 
+    'phone': 'None', 
+    'dob': datetime.date(2021, 3, 26), 
+    'gender': 'Male', 
+    'payment_method': '{}', 
+    'insurance_information': '{}', 
+    'created_at': None, 
+    'updated_at': None, 
+
+    'accession_number': 210210003, 
+    'r.patient_id': 26, 
+    'created_by': 1, 
+    'r.created_at': datetime.datetime(2021, 3, 26, 21, 46, 53), 
+
+    'specimen_id': 4, 
+    's.accession_number': 210210003, 
+    'type': 'urine', 
+    's.created_by': 2, 
+    's.created_at': datetime.datetime(2021, 3, 29, 22, 4, 34), 
+
+    'result_id': 4, 
+    'sr.accession_number': 210210003, 
+    'sr.specimen_id': 4, 
+    'machine_id': 1,
+     
+    'm.machine_id': 1, 
+    'name': 'Olympus AU400', 
+    'results_table': 'result_machine_olympus'
+}

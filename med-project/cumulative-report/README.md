@@ -1,0 +1,1 @@
+`pip install -t ./layer/python/lib/python3.8/site-packages/ pymysql xhtml2pdf` in layers
