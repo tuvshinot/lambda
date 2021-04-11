@@ -1,8 +1,7 @@
 import sys
 import os
 import tempfile
-from time import strftime
-import datetime
+from time import strftime, gmtime, time
 
 import boto3
 import pymysql
@@ -19,14 +18,13 @@ DB_NAME = os.environ['DB_NAME']
 PATIENT_ID = os.environ['PATIENT_ID']
 BUCKET_NAME = os.environ['BUCKET_NAME']
 LAB_NAME = os.environ['LAB_NAME']
-REGION = os.environ.get('AWS_REGION')
 
 s3 = boto3.client('s3')
 
 
 def lambda_handler(event, context):
-    date_time_reported = strftime('%m/%d/%Y at %H:%M')
-    datetime_utc = datetime.datetime.now(datetime.timezone.utc)
+    gmt_time = gmtime()
+    date_time_reported = strftime('%m/%d/%Y at %H:%M', gmt_time)
     
     # Connection setup
     try:
@@ -71,10 +69,11 @@ def lambda_handler(event, context):
     with tempfile.TemporaryDirectory() as tmpdir:
         
         # Report generated time
-        datetime_iso_combined = datetime_utc.isoformat().replace('-', '').replace(':', '').replace('.', '').replace('+', '')
+        random_seconds = str(time()).split('.')[1]
+        datetime_iso_combined = strftime('%Y%m%d-%H%M%S', gmt_time)
 
         # Building file name
-        file_name = '{patient_id}_{timestamp}.pdf'.format(patient_id=PATIENT_ID, timestamp=datetime_iso_combined)
+        file_name = '{patient_id}_{timestamp}_{seconds}.pdf'.format(patient_id=PATIENT_ID, timestamp=datetime_iso_combined, seconds=random_seconds)
 
         # Openning file at location
         output_filename = os.path.join(tmpdir, file_name)
@@ -101,14 +100,13 @@ def lambda_handler(event, context):
         result_file.close() 
         print('INFO: Status {}'.format(pisa_status.err))
 
-        s3.upload_file(output_filename, BUCKET_NAME, '{}/cumulative_report/{}'.format(LAB_NAME, file_name), ExtraArgs={'ACL': 'public-read'})
+        s3.upload_file(output_filename, BUCKET_NAME, '{}/cumulative_report/{}'.format(LAB_NAME, file_name))
         print('SUCCESS: PDF is uploaded to Bucket!')
         
         # Insert into report_cumulative
-        utc_time = datetime_utc.isoformat()
-        report_public_path = 'https://{bucket_name}.s3-{region}.amazonaws.com/{lab_name}/cumulative_report/{file_name}'.format(
-            bucket_name=BUCKET_NAME, region=REGION, lab_name=LAB_NAME, file_name=file_name)
-        report_data = (PATIENT_ID, patient_results[0]['created_by'], utc_time, report_public_path)
+        date_report_time_table = strftime('%Y-%m-%d-%H-%M', gmt_time)
+
+        report_data = (PATIENT_ID, patient_results[0]['created_by'], date_report_time_table, file_name)
         
         with conn.cursor() as cursor:
             sql = """INSERT INTO report_cumulative (patient_id, created_by, created_at, filepath) 
